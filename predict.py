@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# This is a starter notebook for an updated module 5 of ML Zoomcamp
-# 
-# The code is based on the modules 3 and 4. We use the same dataset: [telco customer churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
-
 import pickle
 from fastapi import FastAPI
 import uvicorn
+from typing import Dict, Any
 
 app= FastAPI(title = "customer-churn-prediction")
 
@@ -20,7 +17,7 @@ def predict_single(customer):
 
 
 @app.post("/predict")
-def predict(customer):
+def predict(customer: Dict[str, Any]): # DictVectorizer expect dict
     prob = predict_single(customer)
 
     return {
